@@ -1,7 +1,7 @@
 import * as http from 'http'
 
-import { IUser } from 'IUser'
-import * as utils from 'utils'
+import { IUser } from './IUser'
+import * as utils from './utils'
 
 export const parsePost = async(request: http.IncomingMessage, response: http.ServerResponse): Promise<IUser> =>
   new Promise((res, rej) => {

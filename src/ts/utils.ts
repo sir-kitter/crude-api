@@ -1,6 +1,12 @@
 import * as uuid from 'uuid'
 
-export const isUuid = (id: string) => uuid.version(id) == 4 && uuid.validate(id)
+export const isUuid = (id: string) => {
+  try {
+    return uuid.version(id) == 4 && uuid.validate(id)
+  } catch {
+    return false
+  }
+}
 
 
 import * as http from 'http'

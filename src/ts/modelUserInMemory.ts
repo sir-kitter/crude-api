@@ -1,6 +1,6 @@
 import * as uuid from 'uuid'
 
-import { IUser } from 'IUser'
+import { IUser } from './IUser'
 
 
 const tableUsers: IUser[] = []
