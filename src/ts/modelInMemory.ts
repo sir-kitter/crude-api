@@ -1,13 +1,13 @@
 import * as uuid from 'uuid'
 
-import { IUser } form 'IUser'
+import { IUser } from 'IUser'
 
 
 const tableUsers: IUser[] = []
 
 export async function createUnique(user: IUser): Promise<IUser> {
   return new Promise(res => {
-    const uniqueUser = { id: uuid.v4(), ...user }
+    const uniqueUser = { ...user, id: uuid.v4() }
     tableUsers.push(uniqueUser)
     res(uniqueUser)
   })
@@ -17,7 +17,7 @@ export async function findAll(): Promise<IUser[]> { return new Promise(res => re
 
 export async function findById(id: string): Promise<null | IUser> {
   return new Promise(res => {
-    const user = tableUsers.find(user => id == user.id)
+    const user = tableUsers.find(user => id == user.id) ?? null
     res(user)
   })
 }
@@ -28,7 +28,7 @@ export async function updateById(desiredId: string, newInfo: IUser): Promise<IUs
     if(index == -1) {
       rej(null)
     } else {
-      res(tableUsers[index] = { desiredId, ...newInfo })
+      res(tableUsers[index] = { ...newInfo, id: desiredId })
     }
   })
 }
