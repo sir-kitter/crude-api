@@ -15,14 +15,18 @@ export const getAllUsers = async(req: http.IncomingMessage, res: http.ServerResp
 }
 
 export async function createUser(req: http.IncomingMessage, res: http.ServerResponse) {
-  const content = await parsePost(req, res)
-  const { username, age, hobbies } = content
+  try{
+    const content = await parsePost(req, res)
+    const { username, age, hobbies } = content
 
-  if (!username || !age || !hobbies)
-    return utils.sendJSON(400, { message: 'not all fields are specified' }, res)
+    if (!username || !age || !hobbies)
+      return utils.sendJSON(400, { message: 'not all fields are specified' }, res)
 
-  const newUser = await modelUser.createUnique({ id: '', username, age, hobbies })
-  utils.sendJSON(201, newUser, res)
+    const newUser = await modelUser.createUnique({ id: '', username, age, hobbies })
+    utils.sendJSON(201, newUser, res)
+  } catch(err) {
+    utils.sendJSON(500, 'Internal server error', res)
+  }
 }
 
 export async function getUserById(req: http.IncomingMessage, res: http.ServerResponse, id: string) {
@@ -41,6 +45,7 @@ export async function deleteUserById(req: http.IncomingMessage, res: http.Server
 }
 
 export async function updateUserById(req: http.IncomingMessage, res: http.ServerResponse, id: string) {
+  try {
     const user = await modelUser.findById(id)
     if (!user) return utils.sendJSON(404, { message: "user with such id doesn't exist" }, res)
 
@@ -54,4 +59,7 @@ export async function updateUserById(req: http.IncomingMessage, res: http.Server
 
     const updatedUser = await modelUser.updateById(id, newFields)
     utils.sendJSON(200, updatedUser, res)
+  } catch(err) {
+    utils.sendJSON(500, 'Internal server error', res)
+  }
 }

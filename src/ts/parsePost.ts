@@ -17,6 +17,7 @@ export const parsePost = async(request: http.IncomingMessage, response: http.Ser
             rej(err)
           }
         })
+        .on('error', err => rej(err))
     } catch (err) {
       utils.sendJSON(500, { message: 'Server side error.' }, response)
       rej(err)

@@ -14,7 +14,10 @@ const notFound = (info: string, response: http.ServerResponse) => {
     utils.sendJSON(404, { message: `${info} was not found.`}, response)
 }
 
-export const server = http.createServer((request, response) => {
+process.on('unhandledRejection', e => console.log(e));
+process.on('uncaughtException', e => console.log(e));
+
+export const server = http.createServer({ insecureHTTPParser: true }, (request, response) => {
   try {
     if (!request.url) return notFound(request.url ?? '', response)
 
@@ -36,7 +39,7 @@ export const server = http.createServer((request, response) => {
     utils.sendJSON(500, { message: 'Server error' }, response)
   }
 })
-.on('error', (err) => {
+.on('error', err => {
   console.log(`unhandled exception, error: ${JSON.stringify(err)}`)
 })
 .on('clientError', (err, socket) => {

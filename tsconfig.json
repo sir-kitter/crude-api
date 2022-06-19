@@ -14,7 +14,7 @@
       "parsePost": ["./src/ts/parsePost"],
       "utils": ["./src/ts/utils"],
       "modelUserInMemory": ["./src/ts/modelUserInMemory"],
-      "controllerUser": ["./src/ts/controllerUser"]
+      "controllerUser": ["./src/ts/controllerUser"],
     }
   },
   "include": ["src/**/*"]
