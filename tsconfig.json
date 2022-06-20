@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": false,
+    "outDir": "./src/js",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "paths": {
+      "dotenv": ["./node_modules/dotenv/lib/main"],
+      "IUser": ["./src/ts/IUser"],
+      "parsePost": ["./src/ts/parsePost"],
+      "utils": ["./src/ts/utils"],
+      "modelUserInMemory": ["./src/ts/modelUserInMemory"],
+      "controllerUser": ["./src/ts/controllerUser"],
+    }
+  },
+  "include": ["src/**/*"]
+}
